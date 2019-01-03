@@ -7,4 +7,10 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'javascript-book-with-me';
+
+  transferVariable = "Transfer Variable";
+  
+  buttonHandler() {
+    alert('I am clicked');
+  };
 }
