@@ -7,7 +7,7 @@ const rentalSchema = new Schema({
     street: {type: String, required: true, min: [4, 'Street name to short, min 4']},
     category: {type: String, required: true, lowercase: true},
     image: {type: String, required: true},
-    bedroom: Number,
+    bedrooms: Number,
     shared: Boolean,
     description: {type: String, required: true},
     dailyRate: Number,
