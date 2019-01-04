@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
 import { Rental } from './rental.model';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 
 @Injectable()
@@ -47,7 +48,7 @@ export class RentalService {
         createdAt: "04/01/2019"
       },
       {
-        id: "  ",
+        id: "4",
         title: "Central Apartment 4",
         city: "Berlin",
         street: "Haupt strasse",
@@ -62,22 +63,23 @@ export class RentalService {
 
     public getRentals(): Observable<Rental[]  > {
       
-      const rentalObservable: Observable<Rental[]> = new Observable((observer) =>{
+      return new Observable<Rental[]>((observer) =>{
         setTimeout(() =>{
           
           observer.next(this.rentals);
         }, 1000);
-        setTimeout(() =>{
-          
-          observer.error("I am error");
-        }, 2000);
-        setTimeout(() =>{
-           
-          observer.complete();
-        }, 3000);
       }) ;
-      
-      
-      return rentalObservable;
+    }
+
+    public getRentalById(rentalId: string): Observable<Rental> {
+      return new Observable<Rental>((observer) => {
+        setTimeout(() =>{
+          const foundRental = this.rentals.find((rental) => {
+            return rental.id === rentalId;
+          });
+          console.log(foundRental)
+          observer.next(foundRental);
+        }, 500);
+      });
     }
 }
