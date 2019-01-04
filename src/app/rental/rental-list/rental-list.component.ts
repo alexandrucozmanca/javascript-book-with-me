@@ -6,17 +6,13 @@ import { Rental } from '../shared/rental.model';
 @Component({
   selector: 'bwn-rental-list',
   templateUrl: './rental-list.component.html',
-  styleUrls: ['./rental-list.component.css']
+  styleUrls: ['./rental-list.component.scss']
 })
 export class RentalListComponent implements OnInit {
 
   rentals: Rental[] = [];
 
-  restVariable: string = "1";
-  testNumber: number = 2;
-
   constructor(private rentalService: RentalService) {   
-  
   }
 
   ngOnInit() {
