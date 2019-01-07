@@ -6,7 +6,7 @@
             </div>
             <div class="col-md-6">
               <!-- Will be replaced with map !!!! -->
-              <img src="{{currentRental.image}}" alt="">
+              <bwm-map [location]="currentRental.city + ', ' + currentRental.street">  </bwm-map>
             </div>
           </div>
         </div>
@@ -24,7 +24,7 @@
                   <span><i class="fa fa-bed"></i> {{currentRental.bedrooms + 2}} beds</span>
                 </div>
                 <p class="rental-description">
-                  {{currentRental.description | upper}}
+                  {{currentRental.description}}
                 </p>
                 <hr>
                 <div class="rental-assets">
