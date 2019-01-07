@@ -1,4 +1,5 @@
 const Rental = require('./models/rental');
+const User = require('./models/user');
 
 class DBBootstrap {
     constructor(){
@@ -35,22 +36,38 @@ class DBBootstrap {
             description: "Very nice apartment in center of the city.",
             dailyRate: 23
         }];
+
+        this.users = [{   
+            username: "Test User",
+            email: "test@gmail.com",
+            password: "testtest"
+        }];
     }
 
-    pushRentalsToDb() {
+    pushDataToDb() {
+        const user = new User(this.users[0]);
+
         this.rentals.forEach((rental) =>{
             const newRental = new Rental(rental);
+            newRental.user = user;
+
+            user.rentals.push(newRental);
             newRental.save();
-        })
+        });
+
+        user.save();
     };
 
+    
     async cleanDb() {
+        await User.deleteMany({});
         await Rental.deleteMany({});
     };
 
-    seedDb() {
-        this.cleanDb();
-        this.pushRentalsToDb();
+    async seedDb() {
+        await this.cleanDb();
+        this.pushDataToDb();
+
     }
 
    
