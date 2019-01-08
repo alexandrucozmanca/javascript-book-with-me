@@ -9,7 +9,7 @@ const userRoutes = require('./routes/users');
 
 mongoose.connect(config.DB_URL, { useNewUrlParser: true }).then(() =>{
     const bootstrap = new DbBootstrap();
-    bootstrap.seedDb();
+    // bootstrap.seedDb();
 });
 
 const app = express();
