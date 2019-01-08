@@ -11,6 +11,7 @@ import { RentalService } from './shared/rental.service';
 import { RentalDetailComponent } from './rental-detail/rental-detail.component';
 import { UpperCasePipe } from '../common/pipes/uppercase.pipe';
 import { MapModule } from '../common/map/map.module';
+import { AuthGuardService } from '../auth/shared/auth.guard';
 
 
 const routes: Routes = [
@@ -18,7 +19,7 @@ const routes: Routes = [
      component: RentalComponent,
      children: [
          {path:'', component: RentalListComponent},
-         {path: ':rentalId', component: RentalDetailComponent}
+         {path: ':rentalId', component: RentalDetailComponent, canActivate: [AuthGuardService]}
      ]
     }
   ]
