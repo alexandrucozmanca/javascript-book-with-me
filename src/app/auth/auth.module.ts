@@ -6,6 +6,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
+import { AuthComponent } from './auth.component'
 
 import { AuthService } from './shared/auth.service';
 import { AuthGuardService } from './shared/auth.guard';
@@ -20,7 +21,8 @@ const routes: Routes = [
 @NgModule({
     declarations: [ 
         LoginComponent,
-        RegisterComponent
+        RegisterComponent,
+        AuthComponent
     ],
     imports: [
         CommonModule,

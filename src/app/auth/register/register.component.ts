@@ -22,7 +22,7 @@ export class RegisterComponent implements OnInit {
   ngOnInit() {
   }
 
-  register(registerForm){
+  register(){
     
     this.authService.register(this.formData).subscribe(
       () => {

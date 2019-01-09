@@ -12,6 +12,7 @@
                     type="text"
                     class="form-control"
                     id="username"
+                    placeholder="user"
                     required> 
 
             <div *ngIf="username.invalid && (username.dirty || username.touched)"
@@ -30,6 +31,7 @@
                     type="email"
                     class="form-control"
                     id="email"
+                    placeholder="email@domain.com"
                     required>
             <div *ngIf="email.invalid && (email.dirty || email.touched)"
               class="alert alert-danger">
@@ -47,6 +49,7 @@
                     name="password"
                     class="form-control"
                     id="password"
+                    placeholder="••••••••"
                     required>
             <div *ngIf="password.invalid && (password.dirty || password.touched)"
               class="alert alert-danger">
@@ -64,6 +67,7 @@
                     name="passwordConfirmation" 
                     class="form-control"
                     id="passwordConfirmation"
+                    placeholder="••••••••"
                     required>
 
             <div *ngIf="passwordConfirmation.invalid 
@@ -75,7 +79,7 @@
             </div>            
           </div>
 
-          <button [disabled]="!registerForm.form.valid" (click)="register(registerForm)" type="submit" class="btn btn-bwm">Submit</button>
+          <button [disabled]="!registerForm.form.valid" (click)="register()" type="submit" class="btn btn-bwm">Submit</button>
         </form>
 
         <div *ngIf="errors.length > 0" class="alert alert-danger">
