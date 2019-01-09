@@ -24,7 +24,14 @@ const userSchema = new Schema({
         min: [4, 'Password to short, min 4'],
         max: [32, 'Password to long, max 32.']
     },
-    rentals: [{type: Schema.Types.ObjectId, ref: 'Rental'}]
+    rentals: [{
+        type: Schema.Types.ObjectId,
+        ref: 'Rental'
+    }],
+    bookings: [{
+        type: Schema.Types.ObjectId,
+        ref: 'Booking'
+    }]
 });
 
 userSchema.pre('save', function(next){
