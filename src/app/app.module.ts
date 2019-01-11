@@ -1,7 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { Routes, RouterModule} from '@angular/router';
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {ToasterModule, ToasterService} from 'angular2-toaster';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -24,6 +26,9 @@ const routes: Routes = [
     AppRoutingModule,
     RentalModule,
     AuthModule,
+    NgbModule.forRoot(),    
+    BrowserAnimationsModule,
+    ToasterModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]
