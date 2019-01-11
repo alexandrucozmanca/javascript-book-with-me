@@ -1,9 +1,8 @@
 const express = require('express');
 const router = express.Router();
 
-const Rental = require('../models/rental');
-
 const UserController = require('../controllers/user');
+const RentalController = require('../controllers/rental');
 
 router.get('/secret', UserController.authMiddleware,  function (req, res) {
 
@@ -11,27 +10,10 @@ router.get('/secret', UserController.authMiddleware,  function (req, res) {
 
 });
 
-router.get('', function (req, res) {
-    Rental.find({})
-        .select('-bookings')
-        .exec(function(err, foundRentals) {      
-            res.json(foundRentals);
-    })
-});
+router.get('/:rentalId', RentalController.findRentalById);
 
-router.get('/:rentalId', function(req, res){
-    const rentalId = req.params.rentalId;
- 
-    Rental.findById(rentalId)
-        .populate('user', 'username -_id')
-        .populate('bookings', 'startAt endAt -_id')
-        .exec(function(err, foundRental) {
-            if(err){
-                res.status(422).send({errors: [{code: 422 ,title: 'Rental Error!', detail: 'Could not find rental'}]});
-            }
-        
-             res.json(foundRental);
-    })
-});
+router.get('', RentalController.getRentals);
+
+router.post('', UserController.authMiddleware, RentalController.createRental);
 
 module.exports = router; 

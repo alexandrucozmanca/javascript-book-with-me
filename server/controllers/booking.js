@@ -69,5 +69,4 @@ exports.createBooking = async function(req, res) {
       
         return isValid;
     }
-
 }

@@ -1,9 +1,9 @@
 const express = require('express');
 const router = express.Router();
 
-const User = require('../controllers/user')
-const Booking = require('../controllers/booking');
+const UserController = require('../controllers/user')
+const BookingController = require('../controllers/booking');
 
-router.post('',User.authMiddleware, Booking.createBooking);
+router.post('', UserController.authMiddleware, BookingController.createBooking);
 
 module.exports = router; 

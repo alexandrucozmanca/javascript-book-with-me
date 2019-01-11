@@ -82,9 +82,7 @@ exports.register = function (req, res) {
 
             return res.json({'register': true});
         })
-    });
-
-   
+    });   
 }
 
 exports.authMiddleware = function (req, res, next) {
