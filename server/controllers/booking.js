@@ -6,17 +6,17 @@ const moment = require('moment');
 const { normalizeErrors } = require('../helpers/mongoose');
 
 
-exports.createBooking = function(req, res) {
+exports.createBooking = async function(req, res) {
 
     const {startAt, endAt, createdAt, days, totalPrice, guests, rental } = req.body;
     const user = res.locals.user;
 
     const booking = new Booking({startAt, endAt, createdAt, days, totalPrice, guests});
 
-    Rental.findById(rental._id)
+    await Rental.findById(rental._id)
         .populate('bookings')
         .populate('user')
-        .exec(function(err, foundRental){
+        .exec(async function(err, foundRental){
             if(err){
                 return res.status(422)
                     .send({errors: normalizeErrors(err.errors)});
@@ -32,15 +32,15 @@ exports.createBooking = function(req, res) {
                 booking.rental = foundRental;
                 foundRental.bookings.push(booking);
 
-                booking.save(function(err)  {
+                await booking.save(async function(err)  {
                       if(err){
                         return res.status(422)
                             .send({errors: normalizeErrors(err.errors)});
                     }
 
-                    foundRental.save();
+                   await foundRental.save();
 
-                    User.update({_id: user.id}, {$push: {bookings: booking }}, function(){});
+                   User.updateOne({_id: user.id}, {$push: {bookings: booking }}, function(){});
                 });
 
                 return res.json({startAt: booking.startAt, endAt: booking.endAt});

@@ -1,11 +1,25 @@
 @import 'variables';
 
+.daterangepicker {
+  
+  td {
+    &.in-range{
+      background-color: #FFa9a9 !important;
+    }
 
-.daterangepicker{
+    &.active{
+      background-color: $main-color !important;
+      &:hover {
+        background-color: $main-color !important;
+      }
+    }
+  }
+
   &-input {
     font-size: 2.15vh;
   }
 }
+
 
 .booking {
   padding: 20px;
@@ -43,4 +57,32 @@
     font-size: 13px;
     font-weight: 300;
   }
+}
+
+// MODAL
+.title {
+  font-weight: 700;
+  font-size: 24px;
+}
+
+.buttons {
+  margin: 15px 0px;
+}
+
+em {
+  font-style: normal;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+p {
+  margin: 0;
+}
+
+.modal-error{
+  margin: 16px;
+}
+
+btn-bwn{
+  background: #FF5A5F;
 }

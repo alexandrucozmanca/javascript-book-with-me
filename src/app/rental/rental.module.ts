@@ -1,20 +1,26 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import { Routes, RouterModule} from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
-import { NgPipesModule } from 'ngx-pipes';
+import { ToasterModule } from 'angular2-toaster';
 import { Daterangepicker } from 'ng2-daterangepicker';
+import { NgPipesModule } from 'ngx-pipes';
+
+import { MapModule } from '../common/map/map.module';
 
 import { RentalListComponent } from './rental-list/rental-list.component';
 import { RentalListItemComponent } from './rental-list-item/rental-list-item.component';
 import { RentalComponent } from './rental.component';
-import { RentalService } from './shared/rental.service';
 import { RentalDetailComponent } from './rental-detail/rental-detail.component';
-import { UpperCasePipe } from '../common/pipes/uppercase.pipe';
-import { MapModule } from '../common/map/map.module';
-import { AuthGuardService } from '../auth/shared/auth.guard';
 import { RentalDetailBookingComponent } from './rental-detail/rental-detail-booking/rental-detail-booking.component';
 
+import { UpperCasePipe } from '../common/pipes/uppercase.pipe';
+
+import { AuthGuardService } from '../auth/shared/auth.guard';
+import { RentalService } from './shared/rental.service';
+import { BookingService } from '../booking/shared/booking.service';
+import { HelperService } from "../common/service/helper.service"
 
 const routes: Routes = [
     {path: 'rentals', 
@@ -37,14 +43,18 @@ const routes: Routes = [
     ],
     imports: [
         CommonModule,
+        FormsModule,
         RouterModule.forChild(routes),
         HttpClientModule,
         NgPipesModule,
         MapModule,
-        Daterangepicker
+        Daterangepicker,
+        ToasterModule.forRoot()
     ],
     providers: [
-        RentalService
+        RentalService,
+        HelperService,
+        BookingService
     ]
 })
 
