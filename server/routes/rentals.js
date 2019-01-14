@@ -10,10 +10,13 @@ router.get('/secret', UserController.authMiddleware,  function (req, res) {
 
 });
 
+// get rental by ID
 router.get('/:rentalId', RentalController.findRentalById);
 
+// get all rentals
 router.get('', RentalController.getRentals);
 
+// create rental
 router.post('', UserController.authMiddleware, RentalController.createRental);
 
 module.exports = router; 

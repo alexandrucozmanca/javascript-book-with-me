@@ -2,7 +2,8 @@ import { Component, OnInit, Input, ViewChild, ViewEncapsulation } from '@angular
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import * as moment from 'moment';
 import { ToasterService} from 'angular2-toaster';
-
+import 'rxjs/add/operator/toPromise';
+import 'rxjs/add/operator/map';
 
 import { Rental } from 'src/app/rental/shared/rental.model';
 import { Booking } from 'src/app/booking/shared/booking.model';
@@ -10,8 +11,8 @@ import { Booking } from 'src/app/booking/shared/booking.model';
 import { HelperService } from '../../../common/service/helper.service';
 import { BookingService } from 'src/app/booking/shared/booking.service';
 import { RentalService } from '../../shared/rental.service';
-import 'rxjs/add/operator/toPromise';
-import 'rxjs/add/operator/map';
+import { AuthService } from '../../../auth/shared/auth.service'
+
 import { DaterangePickerComponent } from 'ng2-daterangepicker';
 
 
@@ -47,7 +48,8 @@ export class RentalDetailBookingComponent implements OnInit {
     private helper: HelperService,
     private bookingService: BookingService,
     private rentalService: RentalService,
-    private toasterService: ToasterService
+    private toasterService: ToasterService,
+    private authService: AuthService
   ) {
     this.toasterService = toasterService;
   }
