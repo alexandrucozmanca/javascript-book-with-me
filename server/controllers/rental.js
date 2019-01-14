@@ -73,9 +73,7 @@ exports.createRental = function (req, res) {
         }
 
         User.updateOne({_id: user.id}, {$push: {rentals: rental}}, function(){});      
-        return res.json(rental);
-        
-    });
-
-   
+       
+        return res.json(rental); 
+    });  
 }

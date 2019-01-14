@@ -5,7 +5,6 @@
               <img src="{{currentRental.image}}" alt="">
             </div>
             <div class="col-md-6">
-              <!-- Will be replaced with map !!!! -->
               <bwm-map [location]="currentRental.city + ', ' + currentRental.street">  </bwm-map>
             </div>
           </div>
@@ -16,6 +15,10 @@
             <div class="col-md-8">
               <div class="rental">
                 <h2 class="rental-type {{currentRental.category}}">{{currentRental.shared ? 'Shared' : 'Single'}} {{currentRental.category}}</h2>
+                <div class="rental-owner">
+                  <img src="https://api.adorable.io/avatars/285/abott@adorable.png" alt="">
+                  <span>{{currentRental.user.username}}</span>
+                </div>
                 <h1 class="rental-title">{{currentRental.title}}</h1>
                 <h2 class="rental-city"> {{currentRental.city | ucwords}}</h2>
                 <div class="rental-room-info">
