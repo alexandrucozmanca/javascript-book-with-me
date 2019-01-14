@@ -26,7 +26,10 @@ export class RentalCreateComponent implements OnInit {
 
 
   createRental(){    
-   
+    this.errors = [];
+
+    console.log(this.newRental);
+
     this.rentalService.createRental(this.newRental).subscribe(
       (rental: Rental) =>{
         console.log(rental);
@@ -38,9 +41,8 @@ export class RentalCreateComponent implements OnInit {
     );
   }
 
-  uploadImage(){
-    this.newRental.image = "https://booksync-jerga-prod.s3.amazonaws.com/uploads/rental/image/5/image.jpeg"
-    
+  handleImageChange() {
+    this.newRental.image = "https://booksync-jerga-prod.s3.amazonaws.com/uploads/rental/image/13/image.jpeg";
   }
   
 }
