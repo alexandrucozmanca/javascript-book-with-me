@@ -11,7 +11,8 @@ exports.findRentalById = function(req, res){
         .populate('bookings', 'startAt endAt -_id')
         .exec(function(err, foundRental) {
             if(err){
-                res.status(422).send({errors: [{code: 422 ,title: 'Rental Error!', detail: 'Could not find rental'}]});
+                return res.status(422)
+                    .send({errors: [{code: 422 ,title: 'No rentals Found Error!', detail: `There are no rental with id: ${rentalId}`}]});
             }
         
              res.json(foundRental);
@@ -39,15 +40,14 @@ exports.getRentals = function (req, res) {
 }
 
 exports.createRental = function (req, res) {
-
     const {title, city, street, category, image, bedrooms, shared, description, dailyRate } = req.body;
     const user = res.locals.user;
     const bookings = [];
     const createdAt = moment();
     
-    if(!title || !city || !street  || !category ||!image || !bedrooms  || !shared  || !description  || !dailyRate ){
+    if(!title || !city || !street  || !category ||!image || !bedrooms || !description  || !dailyRate ){
         return res.status(422)
-            .send({errors: [{code: 422 ,title: 'Data missing Error!', detail: 'Provide all needed information'}]});
+            .send({errors: normalizeErrors(err.errors)});
     }
     
     const rental = new Rental({
@@ -76,4 +76,58 @@ exports.createRental = function (req, res) {
        
         return res.json(rental); 
     });  
+}
+
+exports.deleteRentalById = function(req, res) {
+    const user = res.locals.user;
+
+    Rental
+        .findById(req.params.rentalId)
+        .populate('user', '_id')
+        .populate({
+            path: 'bookings',
+            select: 'startAt',
+            match: { startAt: { $gt: new Date()}}
+        })
+        .exec(function(err, foundRental) {
+            if(err){
+                return res.status(422)
+                    .send({errors: normalizeErrors(err.errors)});
+            }
+
+            if(user.id !== foundRental.user.id){
+                return res.status(422)
+                    .send({errors: [{code: 422 ,title: 'Invalid User!', detail: 'You can not delete another owner`s rentals'}]});
+            }
+
+            if(foundRental.bookings.length > 0){
+                return res.status(422)
+                    .send({errors: [{code: 422 ,title: 'Active Bookings!', detail: 'You can not delete a rental with active upcoming bookings'}]});
+            }
+        
+            foundRental.remove(err, () =>{
+                if (err){
+                return res.status(422)
+                    .send({errors: normalizeErrors(err.errors)});
+                }
+                
+                return res.json({'status':'deleted'});
+            });
+    });
+}
+
+exports.getRentalsByUser = function(req, res) {
+    user = res.locals.user;
+
+    Rental
+        .where({user})
+        .populate('bookings')
+        .exec(function(err, foundRentals) { 
+            if(err){
+                return res.status(422)
+                            .send({errors: normalizeErrors(err.errors)});
+            }
+           
+            return res.json(foundRentals);
+    });
 }

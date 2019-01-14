@@ -5,6 +5,24 @@ const moment = require('moment');
 
 const { normalizeErrors } = require('../helpers/mongoose');
 
+function isValidBooking(proposedBooking, rental) {
+    let isValid = true;
+  
+    if (rental.bookings && rental.bookings.length > 0) {
+  
+      isValid = rental.bookings.every(function(booking) {
+        const proposedStart = moment(proposedBooking.startAt);
+        const proposedEnd = moment(proposedBooking.endAt);
+  
+        const actualStart = moment(booking.startAt);
+        const actualEnd = moment(booking.endAt);
+  
+        return ((actualStart < proposedStart && actualEnd < proposedStart) || (proposedEnd < actualEnd && proposedEnd < actualStart));
+      });
+    }
+  
+    return isValid;
+}
 
 exports.createBooking = async function(req, res) {
 
@@ -44,29 +62,25 @@ exports.createBooking = async function(req, res) {
                 });
 
                 return res.json({startAt: booking.startAt, endAt: booking.endAt});
-                // return res.json({booking, foundRental});
             } else {
                 return res.status(422)
                     .send({errors: [{code: 422 ,title: 'Invalid Booking Error!', detail: 'Choosen dates are already taken!'}]});
             }
     });
- 
-    function isValidBooking(proposedBooking, rental) {
-        let isValid = true;
-      
-        if (rental.bookings && rental.bookings.length > 0) {
-      
-          isValid = rental.bookings.every(function(booking) {
-            const proposedStart = moment(proposedBooking.startAt);
-            const proposedEnd = moment(proposedBooking.endAt);
-      
-            const actualStart = moment(booking.startAt);
-            const actualEnd = moment(booking.endAt);
-      
-            return ((actualStart < proposedStart && actualEnd < proposedStart) || (proposedEnd < actualEnd && proposedEnd < actualStart));
-          });
-        }
-      
-        return isValid;
-    }
+}
+
+exports.getBookingsByUser = function(req, res) {
+    user = res.locals.user;
+
+    Booking
+        .where({user})
+        .populate('rental')
+        .exec(function(err, foundBookings) { 
+            if(err){
+                return res.status(422)
+                            .send({errors: normalizeErrors(err.errors)});
+            }
+           
+            return res.json(foundBookings);
+    });
 }

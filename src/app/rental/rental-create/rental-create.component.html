@@ -3,7 +3,7 @@
     <div class="row">
       <div class="col-md-5">
         <h1 class="page-title">Create Rental</h1>
-        <form #newRentalForm="ngForm">
+        <form #rentalForm="ngForm">
           <div class="form-group">
             <label for="title">Title</label>
             <input 
@@ -58,7 +58,7 @@
                   class="form-control"
                   id="image"
                   placeholder="Upload file..."
-                  (change)="uploadImage()">
+                  (change)="handleImageChange()">
           </div>
 
           <div class="form-group">
@@ -114,7 +114,7 @@
                   id="shared">
           </div>
           <button 
-                [disabled]="!newRentalForm.form.valid"
+                [disabled]="!rentalForm.form.valid"
                 (click)="createRental()" 
                 type="button" 
                 class="btn btn-bwm">Submit</button>
