@@ -15,6 +15,7 @@ exports.findRentalById = function(req, res){
                     .send({errors: [{code: 422 ,title: 'No rentals Found Error!', detail: `There are no rental with id: ${rentalId}`}]});
             }
         
+            
              res.json(foundRental);
     })
 }
