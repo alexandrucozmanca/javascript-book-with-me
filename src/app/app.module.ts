@@ -3,13 +3,15 @@ import { NgModule } from '@angular/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { Routes, RouterModule} from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {ToasterModule, ToasterService} from 'angular2-toaster';
+import { ToasterModule } from 'angular2-toaster';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './common/header/header.component';
 import { RentalModule} from './rental/rental.module';
 import { AuthModule} from './auth/auth.module';
+import { ManageModule } from './manage/manage.module';
+import { UpperCasePipe } from './common/pipes/uppercase.pipe';
 
 const routes: Routes = [
   {path: '', redirectTo: '/rentals', pathMatch: 'full'},
@@ -18,7 +20,9 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     AppComponent,
-    HeaderComponent
+    HeaderComponent,
+    UpperCasePipe
+   
   ],
   imports: [
     RouterModule.forRoot(routes),
@@ -26,9 +30,11 @@ const routes: Routes = [
     AppRoutingModule,
     RentalModule,
     AuthModule,
+    ManageModule,
     NgbModule.forRoot(),    
     BrowserAnimationsModule,
-    ToasterModule.forRoot()
+    ToasterModule.forRoot(),
+   
   ],
   providers: [],
   bootstrap: [AppComponent]

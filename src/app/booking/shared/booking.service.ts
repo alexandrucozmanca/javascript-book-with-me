@@ -16,4 +16,8 @@ export class BookingService {
     return this.httpClient.post('/api/v1/bookings', booking);
   }
 
+  public getManagedBookings(): Observable<any> {
+    return this.httpClient.get('/api/v1/bookings/manage');
+  }
+
 }
