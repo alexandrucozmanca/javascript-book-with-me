@@ -11,8 +11,8 @@ const bookingRoutes = require('./routes/bookings');
 const path = require('path');
 
 
-console.log(config.DB_URL);
-mongoose.connect(config.DB_URL, { useNewUrlParser: true }).then(() =>{
+
+mongoose.connect(config.DB_URI, { useNewUrlParser: true }).then(() =>{
     
     if(process.env.NODE_ENV !== 'production'){
         const bootstrap = new DbBootstrap();
