@@ -9,9 +9,11 @@ const rentalRoutes = require('./routes/rentals');
 const userRoutes = require('./routes/users');
 const bookingRoutes = require('./routes/bookings');
 
+
+console.log(config.DB_URL);
 mongoose.connect(config.DB_URL, { useNewUrlParser: true }).then(() =>{
     const bootstrap = new DbBootstrap();
-    // bootstrap.seedDb();
+    //bootstrap.seedDb();
 });
 
 const app = express();
