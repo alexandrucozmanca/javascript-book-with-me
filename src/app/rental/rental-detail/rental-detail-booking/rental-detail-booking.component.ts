@@ -49,7 +49,7 @@ export class RentalDetailBookingComponent implements OnInit {
     private bookingService: BookingService,
     private rentalService: RentalService,
     private toasterService: ToasterService,
-    private authService: AuthService
+    public authService: AuthService
   ) {
     this.toasterService = toasterService;
   }
