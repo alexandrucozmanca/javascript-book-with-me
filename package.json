@@ -31,7 +31,7 @@
     "@ng-bootstrap/ng-bootstrap": "^4.0.1",
     "@types/jquery": "^3.2.12",
     "angular2-toaster": "^7.0.0",
-    "bcrypt": "^3.0.3",
+    "bcrypt": "^3.0.0",
     "body-parser": "^1.18.3",
     "bootstrap": "^4.2.1",
     "core-js": "^2.5.4",
