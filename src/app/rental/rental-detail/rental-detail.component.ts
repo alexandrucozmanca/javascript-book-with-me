@@ -16,8 +16,7 @@ export class RentalDetailComponent implements OnInit {
 
   constructor(
     private activatedRoute: ActivatedRoute,
-    private rentalService: RentalService,
-    
+    private rentalService: RentalService
   ) { }
 
   ngOnInit() {
@@ -29,11 +28,11 @@ export class RentalDetailComponent implements OnInit {
   }
 
   getRental(rentalId: string) {
-   
     this.rentalService.getRentalById(rentalId).subscribe (
       (rental: Rental) => {
         this.currentRental = rental;
       });
   }
+
 
 }

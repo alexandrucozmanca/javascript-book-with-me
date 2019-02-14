@@ -23,8 +23,8 @@
                 <h2 class="rental-city"> {{currentRental.city | ucwords}}</h2>
                 <div class="rental-room-info">
                   <span><i class="fa fa-building"></i> {{currentRental.bedrooms}} bedrooms</span>
-                  <span><i class="fa fa-user"></i> {{currentRental.bedrooms + 4}} guests</span>
-                  <span><i class="fa fa-bed"></i> {{currentRental.bedrooms + 2}} beds</span>
+                  <span><i class="fa fa-user"></i> {{+currentRental.bedrooms + 4}} guests</span>
+                  <span><i class="fa fa-bed"></i> {{+currentRental.bedrooms + 2}} beds</span>
                 </div>
                 <p class="rental-description">
                   {{currentRental.description}}
@@ -55,4 +55,3 @@
           </div>
         </div>
       </section>
-      

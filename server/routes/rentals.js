@@ -13,6 +13,9 @@ router.get('/secret', UserController.authMiddleware,  function (req, res) {
 //manage rentals
 router.get('/manage', UserController.authMiddleware, RentalController.getRentalsByUser)
 
+// verify if current user is rental owner
+router.get('/:id/verify-user', UserController.authMiddleware, RentalController.verifyOwnerId)
+
 // get rental by ID
 router.get('/:rentalId', RentalController.findRentalById);
 
@@ -24,5 +27,8 @@ router.post('', UserController.authMiddleware, RentalController.createRental);
 
 //delete rental
 router.delete('/:rentalId', UserController.authMiddleware, RentalController.deleteRentalById);
+
+//update rental
+router.patch('/:rentalId', UserController.authMiddleware, RentalController.updateRentalById);
 
 module.exports = router; 

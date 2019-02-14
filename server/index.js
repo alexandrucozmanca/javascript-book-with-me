@@ -11,8 +11,8 @@ const bookingRoutes = require('./routes/bookings');
 const path = require('path');
 
 
-console.log(config.DB_URL);
-mongoose.connect(config.DB_URL, { useNewUrlParser: true }).then(() =>{
+
+mongoose.connect(config.DB_URI, { useNewUrlParser: true }).then(() =>{
     
     if(process.env.NODE_ENV !== 'production'){
         const bootstrap = new DbBootstrap();
@@ -29,6 +29,7 @@ app.use(bodyParser.json());
 app.use('/api/v1/rentals', rentalRoutes);
 app.use('/api/v1/users', userRoutes);
 app.use('/api/v1/bookings', bookingRoutes);
+
 
 if(process.env.NODE_ENV === 'production'){
 

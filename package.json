@@ -2,7 +2,7 @@
   "name": "javascript-book-with-me",
   "version": "0.0.0",
   "engines": {
-    "node": "8.9.4",
+    "node": "8.12.0",
     "npm": "5.6.0"
   },
   "scripts": {
@@ -38,7 +38,7 @@
     "express": "^4.16.4",
     "font-awesome": "^4.7.0",
     "jsonwebtoken": "^8.4.0",
-    "moment": "^2.19.1",
+    "moment": "^2.24.0",
     "mongoose": "^5.4.2",
     "ng2-daterangepicker": "^2.0.12",
     "ngx-pipes": "^2.3.6",
@@ -48,7 +48,7 @@
     "zone.js": "~0.8.26"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "~0.11.0",
+    "@angular-devkit/build-angular": "^0.12.3",
     "@angular/cli": "~7.1.2",
     "@angular/compiler-cli": "~7.1.0",
     "@angular/language-service": "~7.1.0",

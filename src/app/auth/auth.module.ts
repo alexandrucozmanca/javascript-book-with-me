@@ -19,10 +19,10 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    declarations: [ 
-        LoginComponent,
-        RegisterComponent,
-        AuthComponent
+    declarations: [
+      LoginComponent,
+      RegisterComponent,
+      AuthComponent
     ],
     imports: [
         CommonModule,

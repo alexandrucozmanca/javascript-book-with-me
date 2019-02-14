@@ -30,7 +30,7 @@ export class ManageRentalComponent implements OnInit {
     this.getManagedBookings()
   }
 
-  getManagedBookings(){
+  getManagedBookings() {
     // reset arrays
     this.errors = [];
     this.managedRentals = [];
@@ -50,16 +50,14 @@ export class ManageRentalComponent implements OnInit {
   deleteRental(){
     console.log(`Deleting rental index: ${this.rentalDeleteIndex}, id: ${this.managedRentals[this.rentalDeleteIndex]._id}`)
     this.rentalService.deleteRental(this.managedRentals[this.rentalDeleteIndex]._id).subscribe(
-      (succces) =>{
-        
+      (succces) => {
         this.managedRentals.splice(this.rentalDeleteIndex, 1);
         this.rentalDeleteIndex = undefined;
       },
-      (errorResponse: HttpErrorResponse) =>{
-        console.log('in error')
+      (errorResponse: HttpErrorResponse) => {
           this.errors = errorResponse.error.errors;
           let errorString = '';
-          for (let error of this.errors){
+          for (const error of this.errors) {
             errorString = errorString.concat(error.detail).concat(" ");
             console.log(errorString);
           }
