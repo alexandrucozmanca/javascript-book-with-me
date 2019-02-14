@@ -25,13 +25,12 @@ export class RentalCreateComponent implements OnInit {
   }
 
 
-  createRental(){    
+  createRental() {
     this.errors = [];
-
     console.log(this.newRental);
 
     this.rentalService.createRental(this.newRental).subscribe(
-      (rental: Rental) =>{
+      (rental: Rental) => {
         console.log(rental);
         this.router.navigate([`/rentals/${rental._id}`]);
       },

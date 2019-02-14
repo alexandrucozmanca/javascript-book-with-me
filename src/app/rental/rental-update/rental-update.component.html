@@ -1,0 +1,120 @@
+<toaster-container></toaster-container>
+<section id="rentalDetails" *ngIf="currentRental">
+  <div class="upper-section">
+    <div class="row">
+      <div class="col-md-6">
+        <img src="{{currentRental.image}}" alt="">
+      </div>
+      <div class="col-md-6">
+        <bwm-map
+          [locationSubject]="locationSubject"
+          [location]="currentRental.city + ', ' + currentRental.street">  </bwm-map>
+      </div>
+    </div>
+  </div>
+
+  <div class="details-section">
+    <div class="row">
+      <div class="col-md-8">
+        <div class="rental">
+          <h2 class="rental-type {{currentRental.category}}">
+            {{currentRental.shared ? 'Shared' : 'Single'}}
+            <bwm-editable-select
+              [(entity)]="currentRental"
+              [field]="'shared'"
+              [style]="{'display': 'inline-block'}"
+              [className]="'rental-shared'"
+              [selectOptions]="[true, false]"
+              (entityUpdated)="updateRental(currentRental._id, $event)">
+            </bwm-editable-select>
+
+            <bwm-editable-select
+              [(entity)]="currentRental"
+              [field]="'category'"
+              [style]="{'display': 'inline-block'}"
+              [className]="'rental-category'"
+              [selectOptions]="rentalCategories"
+              (entityUpdated)="updateRental(currentRental._id, $event)">
+            </bwm-editable-select>
+
+          </h2>
+          <div class="rental-owner">
+            <img src="https://api.adorable.io/avatars/285/abott@adorable.png" alt="">
+            <span>{{currentRental.user.username}}</span>
+          </div>
+
+          <bwm-editable-input
+            [(entity)]="currentRental"
+            [field]="'title'"
+            [className]="'rental-title'"
+            [type]="text"
+            (entityUpdated)="updateRental(currentRental._id, $event)">
+          </bwm-editable-input>
+
+          <bwm-editable-input
+            [(entity)]="currentRental"
+            [field]="'city'"
+            [transformView]="stringToUpperCase"
+            [className]="'rental-city'"
+            (entityUpdated)="updateRental(currentRental._id, $event)">
+          </bwm-editable-input>
+
+          <bwm-editable-input
+            [(entity)]="currentRental"
+            [field]="'street'"
+            [transformView]="stringToUpperCase"
+            [className]="'rental-street'"
+            (entityUpdated)="updateRental(currentRental._id, $event)">
+          </bwm-editable-input>
+
+          <div class="rental-room-info">
+            <span><i class="fa fa-building"></i>
+              <bwm-editable-input
+                [(entity)]="currentRental"
+                [field]="'bedrooms'"
+                [className]="'rental-bedrooms'"
+                [type]="'number'"
+                [style]="{'display': 'inline-block'}"
+                (entityUpdated)="updateRental(currentRental._id, $event)">
+              </bwm-editable-input>
+              bedrooms</span>
+            <span><i class="fa fa-user"></i> {{+currentRental.bedrooms + 4}} guests</span>
+            <span><i class="fa fa-bed"></i> {{+currentRental.bedrooms + 2}} beds</span>
+          </div>
+
+          <bwm-editable-text-area
+            [(entity)]="currentRental"
+            [field]="'description'"
+            [className]="'rental-description'"
+            [cols]="'50'"
+            [rows]="'6'"
+            [style]="{'display': 'inline-block'}"
+            (entityUpdated)="updateRental(currentRental._id, $event)">
+          </bwm-editable-text-area>
+
+          <hr>
+          <div class="rental-assets">
+            <h3 class="title">Assets</h3>
+            <div class="row">
+              <div class="col-md-6">
+                <span><i class="fa fa-asterisk"></i> Cooling</span>
+                <span><i class="fa fa-thermometer"></i> Heating</span>
+                <span><i class="fa fa-location-arrow"></i> Iron</span>
+              </div>
+              <div class="col-md-6">
+                <span><i class="fa fa-desktop"></i> Working area</span>
+                <span><i class="fa fa-cube"></i> Washing machine</span>
+                <span><i class="fa fa-cube"></i> Dishwasher</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <bwm-rental-detail-booking
+          [currentRental]="currentRental"
+        ></bwm-rental-detail-booking>
+      </div>
+    </div>
+  </div>
+</section>

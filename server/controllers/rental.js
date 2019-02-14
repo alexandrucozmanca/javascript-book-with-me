@@ -132,3 +132,55 @@ exports.getRentalsByUser = function(req, res) {
             return res.json(foundRentals);
     });
 }
+
+exports.updateRentalById = function (req, res) {
+  const rentalData = req.body;
+  const user = res.locals.user;
+
+  Rental
+    .findById(req.params.rentalId)
+    .populate('user')
+    .exec(function(err,foundRental){
+      if(err){
+        return res.status(422)
+          .send({errors: normalizeErrors(err.errors)});
+      }
+
+      console.log(foundRental);
+
+      if(foundRental.user.id !== user .id){
+        return res.status(422)
+          .send({errors: [{code: 422 ,title: 'Invalid User!', detail: 'You can not modify another owner`s rentals'}]});
+      }
+
+      foundRental.set(rentalData);
+      foundRental.save(function (err) {
+        if (err) {
+          return res.status(422)
+            .send({errors: normalizeErrors(err.errors)});
+        }
+        return res.status(200).send(foundRental);
+      });
+    });
+  
+}
+
+exports.verifyOwnerId = function (req, res) {
+  const user = res.locals.user;
+  Rental
+    .findById(req.params.id)
+    .populate('user')
+    .exec(function (err, foundRental) {
+      debugger
+      if (err){
+        return res.status(422)
+          .send({errors: normalizeErrors(err.errors)});
+      }
+      if(String(foundRental.user._id) !== String(user._id)){
+        return res.status(422)
+          .send({errors: [{code: 422 ,title: 'Invalid User!', detail: 'You are not the owner of this rental'}]});
+      }
+
+      return res.json({'status': 'verified'});
+    })
+}

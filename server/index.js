@@ -30,6 +30,7 @@ app.use('/api/v1/rentals', rentalRoutes);
 app.use('/api/v1/users', userRoutes);
 app.use('/api/v1/bookings', bookingRoutes);
 
+
 if(process.env.NODE_ENV === 'production'){
 
     const appPath = path.join(__dirname, '..', 'dist/javascript-book-with-me');
