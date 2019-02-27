@@ -23,6 +23,7 @@ import { RentalGuardService } from './shared/rental.guard';
 import { RentalService } from './shared/rental.service';
 import { BookingService } from '../booking/shared/booking.service';
 import { HelperService } from '../common/service/helper.service';
+import {PaymentModule} from '../payment/payment.module';
 
 
 const routes: Routes = [
@@ -58,7 +59,8 @@ const routes: Routes = [
       MapModule,
       Daterangepicker,
       ToasterModule.forRoot(),
-      EditableModule
+      EditableModule,
+      PaymentModule
     ],
     providers: [
       RentalService,

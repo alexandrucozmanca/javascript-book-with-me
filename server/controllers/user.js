@@ -119,3 +119,32 @@ function notAuthorized(res){
     return res.status(401)
             .send({errors: [{code: 401 ,title: 'Not authorized!', detail: 'You need to login to get access'}]});
 }
+
+exports.getUser = function (req, res) {
+  const requestedUserId = req.params.id;
+  const user = res.locals.user;
+
+  if (requestedUserId === user.id) {
+    // display all data
+    User.findById(requestedUserId, function (err, foundUser) {
+      if(err){
+        return res.status(422)
+          .send({errors: normalizeErrors(err.errors)});
+      }
+
+      return res.json(foundUser);
+    });
+  } else {
+    // display custom data
+    User.findById(requestedUserId)
+      .select('-revenue -stripeCustomerId -password -_id')
+      .exec(function (err, foundUser) {
+      if(err){
+        return res.status(422)
+          .send({errors: normalizeErrors(err.errors)});
+      }
+
+      return res.json(foundUser);
+    });
+  }
+}

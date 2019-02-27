@@ -8,6 +8,7 @@ const DbBootstrap = require('./db_bootstrap.js');
 const rentalRoutes = require('./routes/rentals');
 const userRoutes = require('./routes/users');
 const bookingRoutes = require('./routes/bookings');
+const paymentsRoutes = require('./routes/payments');
 const path = require('path');
 
 
@@ -16,7 +17,7 @@ mongoose.connect(config.DB_URI, { useNewUrlParser: true }).then(() =>{
     
     if(process.env.NODE_ENV !== 'production'){
         const bootstrap = new DbBootstrap();
-        //bootstrap.seedDb();
+        // bootstrap.seedDb();
     }
     
 
@@ -29,6 +30,7 @@ app.use(bodyParser.json());
 app.use('/api/v1/rentals', rentalRoutes);
 app.use('/api/v1/users', userRoutes);
 app.use('/api/v1/bookings', bookingRoutes);
+app.use('/api/v1/payments', paymentsRoutes);
 
 
 if(process.env.NODE_ENV === 'production'){
