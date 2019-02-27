@@ -11,8 +11,8 @@ import { HeaderComponent } from './common/header/header.component';
 import { RentalModule} from './rental/rental.module';
 import { AuthModule} from './auth/auth.module';
 import { ManageModule } from './manage/manage.module';
+import { UserModule } from './user/user.module';
 import { UpperCasePipe } from './common/pipes/uppercase.pipe';
-
 
 const routes: Routes = [
   {path: '', redirectTo: '/rentals', pathMatch: 'full'},
@@ -31,6 +31,7 @@ const routes: Routes = [
     RentalModule,
     AuthModule,
     ManageModule,
+    UserModule,
     NgbModule.forRoot(),
     BrowserAnimationsModule,
     ToasterModule.forRoot()

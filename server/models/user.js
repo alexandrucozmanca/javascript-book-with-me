@@ -24,6 +24,8 @@ const userSchema = new Schema({
         min: [4, 'Password to short, min 4'],
         max: [32, 'Password to long, max 32.']
     },
+    stripeCustomerId: String,
+    revenue: Number,
     rentals: [{
         type: Schema.Types.ObjectId,
         ref: 'Rental'

@@ -11,5 +11,6 @@ export class Booking {
     totalPrice: number;
     guests: number;
     days: number;
-    rental : Rental; 
+    rental: Rental;
+    paymentToken: any;
 }
