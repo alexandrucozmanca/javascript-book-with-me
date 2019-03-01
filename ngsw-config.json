@@ -19,6 +19,9 @@
       "resources": {
         "files": [
           "/assets/**"
+        ],
+        "urls": [
+         "https://angular-bwm.herokuapp.com/rentals/**"
         ]
       }
     }
