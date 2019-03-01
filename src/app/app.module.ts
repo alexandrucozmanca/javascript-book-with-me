@@ -13,6 +13,8 @@ import { AuthModule} from './auth/auth.module';
 import { ManageModule } from './manage/manage.module';
 import { UserModule } from './user/user.module';
 import { UpperCasePipe } from './common/pipes/uppercase.pipe';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 const routes: Routes = [
   {path: '', redirectTo: '/rentals', pathMatch: 'full'},
@@ -34,7 +36,8 @@ const routes: Routes = [
     UserModule,
     NgbModule.forRoot(),
     BrowserAnimationsModule,
-    ToasterModule.forRoot()
+    ToasterModule.forRoot(),
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [],
   bootstrap: [AppComponent]
